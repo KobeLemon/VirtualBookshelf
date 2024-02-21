@@ -18,7 +18,7 @@ export default async function ArtisanProfile({id, name, description, pictures} :
 						className="object-cover rounded-full"
 						src={pictures.big}
 						alt={`${name}'s Avatar`}
-						width={200}
+						width={100}
 						height={200}
 					/>
 				</div>

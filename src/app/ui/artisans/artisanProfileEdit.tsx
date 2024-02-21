@@ -58,7 +58,7 @@ export default function ArtisanProfileEdit({id, name, description, pictures} : A
 	return (
 		<>
 			{showImageContainer == true && <ChangeImageContainer id={parseInt(id)} handler={handleShowImageContainer} />}
-			<form className="p-5 sm:p-10"
+			<form className="p-5"
 			onSubmit={onSubmitForm}>
 
 				<div className='sm:flex gap-x-10 mb-10'>
@@ -76,7 +76,7 @@ export default function ArtisanProfileEdit({id, name, description, pictures} : A
 							<button type='button' className='border-b-2 border-b-transparent hover:border-b-orange'
 							onClick={handleShowImageContainer}>Change Image</button>
 						</div>
-						
+
 					</div>
 
 					<div className="flex-1 py-4">
@@ -90,7 +90,7 @@ export default function ArtisanProfileEdit({id, name, description, pictures} : A
 						className="w-full mb-4 text-base text-center md:text-left focus:ring-orange focus:border-orange"
 						/>
 
-					</div>					
+					</div>
 
 				</div>
 
@@ -102,7 +102,7 @@ export default function ArtisanProfileEdit({id, name, description, pictures} : A
 						<button type='submit' className='px-8 py-2 bg-[#15803d] text-white font-bold rounded-md'
 						>Save Profile</button>
 					</div>
-				
+
 				</div>
 
 			</form>

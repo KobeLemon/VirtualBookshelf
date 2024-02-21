@@ -1,31 +1,14 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { Category } from '@/app/lib/definitions';
 
-export default function CategoryCard( {
+export default function CategoryCard({ name }: Category) {
+	const formattedName = name.trim().toLowerCase().replace(/\s/g, "-");
 
-  id,
-  
-  name
-
-} : {
-
-  id: number,
-  
-  name: string
-
-} ) {
-
-  return (
-
-    <Link className='flex justify-center items-center px-10 flex-1 basis-60 h-80 rounded-lg bg-orange' href={`/categories/${id}?name=${encodeURIComponent(name.toLocaleLowerCase())}`}>
-
-      <div className='text-4xl font-bold text-center text-black'>
-                
-        {name}
-        
-      </div>
-
-    </Link>
-
-  )
-
+	return (
+		<Link className='flex flex-col align-center justify-center border-2 p-10 text-center' href={`/main/${formattedName}`}>
+			<li>
+				<h3 className='m-0'>{name}</h3>
+			</li>
+		</Link>
+	);
 }

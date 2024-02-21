@@ -1,13 +1,15 @@
 import Image from "next/image";
 import { User } from "@/app/lib/definitions";
-import ItemList from '../../ui/items/ItemList';
-import { getItemsByUser } from '../../lib/data';
+// import ItemList from '../../ui/items/ItemList';
+// import { getItemsByUser } from '../../lib/data';
 
 
-export default async function UserProfile({id, name, description, pictures} : User) {
+export default async function UserProfile(
+	// {id, name, description, pictures} : User
+	) {
 
-	const items = await getItemsByUser(id);
-	console.log(pictures)
+	// const items = await getItemsByUser(id);
+	// console.log(pictures)
 
 	return (
 		<>
@@ -16,24 +18,24 @@ export default async function UserProfile({id, name, description, pictures} : Us
 				<div className="relative aspect-video md:aspect-square">
 					<Image
 						className="object-cover rounded-full"
-						src={pictures.big}
-						alt={`${name}'s Avatar`}
+						src={'@public/placeholder_large.webp'}
+						alt={`XXX Avatar`}
 						width={200}
 						height={200}
 					/>
 				</div>
 
-				<div className="py-4">
+				{/* <div className="py-4">
 					<h1 className="text-3xl text-center mb-1 md:text-4xl md:text-left">{name}</h1>
 					<p className="text-center md:text-left">{description}</p>
-				</div>
+				</div> */}
 
 			</div>
 
-			<div className="flex flex-col items-center justify-center border-t-2 p-5">
+			{/* <div className="flex flex-col items-center justify-center border-t-2 p-5">
 				<h3 className="text-xl text-center">{name}&apos;s Items</h3>
 				<ItemList items={items} />
-			</div>
+			</div> */}
 		</>
 	)
 }

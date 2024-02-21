@@ -23,7 +23,7 @@ export default function Page() {
   const [filteredProducts, setFilteredProducts] = useState([] as Product[]);
 
   const [filters, setFilters] = useState({} as FiltersState);
-  
+
   const selectChangeHandler = useDebouncedCallback(
     (event: ChangeEvent) => {
       const target = event.target as HTMLInputElement;
@@ -74,7 +74,7 @@ export default function Page() {
       //   if ( index === 0  ) setProducts( data as Product[] );
 
       //   if ( index === 1  ) setCategories( data as Category[] );
-      
+
       // } );
 
     }
@@ -90,7 +90,7 @@ export default function Page() {
     const results = products.filter( ( { rating, price, category } ) => {
 
       return ( filters.rating ? filters.rating === rating : true )
-      
+
       &&
 
       ( filters.minPrice ? filters.minPrice <= +price : true )
@@ -111,12 +111,12 @@ export default function Page() {
 
   return (
 
-    <main className='p-8 sm:p-10'>
+    <main className='p-8 col-span-full'>
 
       <h1>Products</h1>
 
       <section>
-        
+
         <div className='flex flex-wrap gap-4 mb-10'>
 
           <label>
@@ -124,13 +124,13 @@ export default function Page() {
               <option value="">Select Rating</option>
                 {
                   Array( 5 )
-                  
+
                     .fill( null )
-                    
+
                     .map( (_, index) => ( <option key={index} value={index+1}>{index+1}</option> ) )
                 }
               </select>
-          
+
           </label>
 
           <label>
@@ -138,7 +138,7 @@ export default function Page() {
               <option value="">Select Category</option>
               {
                 categories
-                  
+
                   .map( ({ id, name }) => ( <option className='lowercase' key={id} value={name}>{name}</option> ) )
               }
             </select>
@@ -172,7 +172,7 @@ export default function Page() {
                 :
 
                 <p className='h5 pt-10'>No product found, adjust your filters</p>
-            
+
           }
 
         </div>

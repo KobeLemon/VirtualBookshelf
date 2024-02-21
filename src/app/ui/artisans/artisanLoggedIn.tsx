@@ -35,7 +35,7 @@ export default async function ArtisanLoggedIn({ params }: { params: { id: string
 
 			/>
 
-			<div className="border-t-2 p-5 sm:p-10">
+			<div className="border-t-2 p-5">
 				<h3 className="text-center mb-1 p-5">Your Products</h3>
 				<CreateProductButton id={artisan.id} collection={artisan.collection} categories={categories}/>
 				<ProductListEdit products={products} categories={categories}/>

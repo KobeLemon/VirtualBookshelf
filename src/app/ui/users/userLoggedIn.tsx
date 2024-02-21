@@ -34,7 +34,7 @@ export default async function UserLoggedIn({ params }: { params: { id: string } 
 
 			/>
 
-			<div className="border-t-2 p-5 sm:p-10">
+			<div className="border-t-2 p-5">
 				<h3 className="text-center mb-1 p-5">Your Items</h3>
 				<CreateItemButton id={user.id} collection={user.collection} categories={categories}/>
 				<ItemListEdit items={items} categories={categories}/>

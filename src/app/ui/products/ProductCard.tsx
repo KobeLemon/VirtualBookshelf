@@ -12,18 +12,18 @@ export default function ProductCard({ id, name, category, price, description, co
 
       <div className='relative h-48 aspect-square sm:aspect-video'>
 
-        <Image 
+        <Image
 
           className='object-cover'
-        
-          src={pictures.small} 
-          
-          alt='' 
-          
+
+          src={pictures.small}
+
+          alt=''
+
           fill
 
           sizes="(max-width: 640px) 192vw, 341vw"
-          
+
         />
 
       </div>
@@ -31,7 +31,7 @@ export default function ProductCard({ id, name, category, price, description, co
       <div className='py-4'>
 
         <StarsRating rating={rating} />
-        
+
         <div className='text-lg'>{name}</div>
 
         <div className='text-dark-grayish-blue mb-2'>{category}</div>

@@ -30,7 +30,7 @@ export default async function Page({
 
   return (
 
-    <main className='p-8 sm:p-10'>
+    <main className='p-8 col-span-full'>
 
       <div className='flex flex-col gap-10 mb-20 md:flex-row'>
 

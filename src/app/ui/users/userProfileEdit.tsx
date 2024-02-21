@@ -58,7 +58,7 @@ export default function UserProfileEdit({id, name, description, pictures} : User
 	return (
 		<>
 			{showImageContainer == true && <ChangeImageContainer id={parseInt(id)} handler={handleShowImageContainer} />}
-			<form className="p-5 sm:p-10"
+			<form className="p-5"
 			onSubmit={onSubmitForm}>
 
 				<div className='sm:flex gap-x-10 mb-10'>

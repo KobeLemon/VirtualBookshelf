@@ -25,8 +25,8 @@ export async function POST(req:Request){
 			})
 
 	} catch(error){
-		console.error('Error creating product profile:', error);
-		return new Response(JSON.stringify({ message: 'Product failed to be created.' }),{
+		console.error('Error getting user:', error);
+		return new Response(JSON.stringify({ message: 'Failed to get user.' }),{
 				status:500,
 				statusText:'INTERNAL SERVER ERROR',
 				headers: {

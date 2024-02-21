@@ -16,10 +16,12 @@ export default function SocialSection(){
               <Link className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50" href="https://www.facebook.com/">
                 <FacebookIcon className="h-6 w-6" />
               </Link>
-              <Link className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50" href="https://twitter.com/">
+
+							<Link className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50" href="https://twitter.com/">
                 <TwitterIcon className="h-6 w-6" />
               </Link>
-              <Link className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50" href="https://www.instagram.com/">
+
+							<Link className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50" href="https://www.instagram.com/">
                 <InstagramIcon className="h-6 w-6" />
               </Link>
             </div>
@@ -27,8 +29,8 @@ export default function SocialSection(){
         </section>
     )
 }
-  
-  
+
+
   function FacebookIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     return (
       <svg
@@ -47,8 +49,8 @@ export default function SocialSection(){
       </svg>
     )
   }
-  
-  
+
+
   function InstagramIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     return (
       <svg
@@ -69,8 +71,8 @@ export default function SocialSection(){
       </svg>
     )
   }
-  
-  
+
+
   function PinIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     return (
       <svg
@@ -90,8 +92,8 @@ export default function SocialSection(){
       </svg>
     )
   }
-  
-  
+
+
   function TwitterIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     return (
       <svg
