@@ -13,13 +13,12 @@ export default function BooksList({ books }: { books: Book[] }) {
 							key={book.book_id}
 							book_id={book.book_id}
 							name={book.name}
-							description=""
+							description={book.description}
 							image={book.image}
-							author=""
-							publisher=""
-							format=""
-							category_id={0}
-							user_id={0}
+							author={book.author}
+							publisher={book.publisher}
+							category_id={book.category_id}
+							user_id={book.user_id}
 						/>
 					))}
 				</ul>

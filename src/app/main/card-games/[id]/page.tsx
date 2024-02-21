@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Metadata } from 'next';
 import IndividualBookCard from '@/app/ui/books/individualBookCard';
 
@@ -10,7 +11,7 @@ export default async function Page() {
 	// const book = await getBookByID();
 	const book = {
 		book_id: 1,
-    name: 'The Lord of The Rings: The Fellowship of the Ring',
+    name: 'The Lord of The Rings: Fellowship of the Ring',
     description: 'In "The Fellowship of the Ring," Frodo Baggins inherits the One Ring, setting off a perilous quest to destroy it. Joined by a diverse group, the Fellowship faces trials, betrayal, and the growing threat of Sauron. Through courage and sacrifice, they confront evil while forging unbreakable bonds of friendship.',
     image: 'https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif',
     author: 'J.R.R. Tolkien',
