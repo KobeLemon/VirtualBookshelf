@@ -1,4 +1,4 @@
-import CategoryCard from '../categories/categoryCard';
+import CategoryCard from './categoryCard';
 import { Category } from '@/app/lib/definitions';
 
 export default function CategoriesList({ categories }: { categories: Category[] }) {
