@@ -1,10 +1,14 @@
 import { sql } from '@vercel/postgres';
 import {
-  Product,
-  Artisan,
-  Review,
-  User,
-  Category
+	User,
+	Book,
+	Movie,
+	TVShow,
+	Game,
+	Music,
+	Website,
+	Category,
+	Genre
 } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
@@ -12,7 +16,7 @@ export async function getUserByEmail(email:string) {
   noStore();
   try {
 		let response;
-    const user = await sql`SELECT id, email FROM HandcraftedHavenUsers WHERE email=${email}`;
+    const user = await sql`SELECT user_id, email FROM public.user WHERE email=${email}`;
 		if (user.rows.length > 0 ) {
 			response = user.rows[0] as User;
 		} else {
@@ -25,255 +29,188 @@ export async function getUserByEmail(email:string) {
   }
 }
 
-export async function getArtisanById(_id: string){
-  noStore();
-  try {
-      const artisan = await sql`SELECT * FROM HandcraftedHavenArtisans WHERE id=${_id}`
-      const rawObj = artisan.rows[0];
-      const picArray = {value:''}
-        if(rawObj.pictures.length > 1) picArray.value = rawObj.pictures
-        else picArray.value = rawObj.pictures[0].split(',')
-      rawObj.pictures = {small: picArray.value[0], medium: picArray.value[0], big: picArray.value[0]}
+export async function getIDNameImageByBookID() {
+	noStore();
+	try {
+      const items = await sql`SELECT book_id, name, image FROM public.book;`
 
-      return rawObj as Artisan
-  } catch (error) {
-      console.error('Failed to fetch artisan:', error);
-      throw new Error('Failed to fetch artisan.');
-  }
-}
-
-
-export async function getProductById(_id: string){
-  noStore();
-  try {
-		const product = await sql`SELECT * FROM HandcraftedHavenProducts WHERE id=${_id}`
-		const rawObj = product.rows[0];
-		const artisanID = rawObj.artisan_id;
-		const full_product = await sql`
-			SELECT
-				HandcraftedHavenProducts.*,
-				HandcraftedHavenArtisans.name as artisan_name,
-				HandcraftedHavenCategories.name as category_name
-			FROM HandcraftedHavenProducts
-			INNER JOIN HandcraftedHavenArtisans
-				ON HandcraftedHavenProducts.artisan_id = HandcraftedHavenArtisans.id
-			INNER JOIN HandcraftedHavenCategories
-				ON HandcraftedHavenProducts.category = HandcraftedHavenCategories.id
-			WHERE
-				HandcraftedHavenProducts.artisan_id = ${artisanID}
-				AND HandcraftedHavenProducts.id = ${_id}`;
-		const rawFullObj = full_product.rows[0];
-    const picArray = {value:''}
-    if(rawFullObj.pictures.length > 1) picArray.value = rawFullObj.pictures
-    else picArray.value = rawFullObj.pictures[0].split(',')
-    console.log('guy-ooo guy-oooo whoa oh',picArray.value)
-    rawFullObj.pictures = {small: picArray.value[0], medium: picArray.value[1], big: picArray.value[2]}
-
-    return rawFullObj as Product;
-  } catch (error) {
-    console.error('Failed to fetch product:', error);
-    throw new Error('Failed to fetch product.');
-  }
-}
-
-export async function getReviewsByProductId(productID: string){
-  noStore();
-  try {
-      const product = await sql`SELECT * FROM HandcraftedHavenReviews WHERE productId=${productID}`
-      const results = product.rows;
-
-      const processed = results.map(item => item as Review);
-
-      return processed as Array<Review>;
-  } catch (error) {
-      console.error('Failed to fetch product:', error);
-      throw new Error('Failed to fetch product.');
-  }
-}
-
-export async function getProductsByCollection(collectionID: string){
-  noStore();
-  try {
-      const product = await sql`SELECT * FROM HandcraftedHavenProducts WHERE collection=${collectionID}`
-      const results = product.rows;
-      const processed = results.map(item => {
-        const picArray = {value:''}
-        if(item.pictures.length > 1) picArray.value = item.pictures
-        else picArray.value = item.pictures[0].split(',')
-        item.pictures = {small: picArray.value[0], medium: picArray.value[1], big: picArray.value[2]}
-
-        return item as Product;
-      })
-
-      return processed as Array<Product>
-  } catch (error) {
-      console.error('Failed to fetch product:', error);
-      throw new Error('Failed to fetch product.');
-  }
-}
-
-export async function getProductsByCategory(categoryID: number){
-  noStore();
-  try {
-      const products = await sql`SELECT HandcraftedHavenProducts.*, HandcraftedHavenCategories.name as category FROM HandcraftedHavenProducts LEFT JOIN HandcraftedHavenCategories ON HandcraftedHavenProducts.category = HandcraftedHavenCategories.id WHERE category = ${categoryID}`
-      const results = products.rows;
+      const results = items.rows;
 
       const processed = results.map(item => {
-        const picArray = {value:''}
-        if(item.pictures.length > 1) picArray.value = item.pictures
-        else picArray.value = item.pictures[0].split(',')
-        item.pictures = {small: picArray.value[0], medium: picArray.value[1], big: picArray.value[2]}
+				return item as Book;
+			});
 
-        return item as Product;
-      })
+			return processed as Array<Book>;
 
-      return processed as Array<Product>
   } catch (error) {
-      console.error('Failed to fetch product:', error);
-      throw new Error('Failed to fetch product.');
+      console.error('Failed to fetch item:', error);
+      throw new Error('Failed to fetch item.');
   }
 }
 
-export async function getArtisanByProduct(product: string | Product){
-  noStore();
-  let value: string = "";
-  if(typeof product == 'string'){
-    value = product
-  }
-  else if('collection' in product) value = product.collection
-  try {
-      const product = await sql`SELECT * FROM HandcraftedHavenArtisans WHERE collection=${value}`
-      const results = product.rows[0];
-      const picArray = {value:''}
-        if(results.pictures.length > 1) picArray.value = results.pictures
-        else picArray.value = results.pictures[0].split(',')
-      results.pictures = {small: picArray.value[0], medium: picArray.value[1], big: picArray.value[2]}
+export async function getIDNameImageByMovieID() {
+	noStore();
+	try {
+      const items = await sql`SELECT movie_id, name, image FROM public.movie;`
 
-      return results as Artisan
-  } catch (error) {
-      console.error('Failed to fetch artisan:', error);
-      throw new Error('Failed to fetch artisan.');
-  }
-}
+      const results = items.rows;
 
-export async function getProducts(){
-  noStore();
-  try {
-      const products = await sql`SELECT HandcraftedHavenProducts.*, HandcraftedHavenCategories.name as category FROM HandcraftedHavenProducts LEFT JOIN HandcraftedHavenCategories ON HandcraftedHavenProducts.category = HandcraftedHavenCategories.id`
-      const results = products.rows;
       const processed = results.map(item => {
-        const picArray = {value:''}
-        if(item.pictures.length > 1) picArray.value = item.pictures
-        else picArray.value = item.pictures[0].split(',')
-        item.pictures = {small: picArray.value[0], medium: picArray.value[1], big: picArray.value[2]}
+				return item as Movie;
+			});
 
-        return item as Product;
-      })
+			return processed as Array<Movie>;
 
-      return processed as Array<Product>
   } catch (error) {
-      console.error('Failed to fetch product:', error);
-      throw new Error('Failed to fetch product.');
+      console.error('Failed to fetch item:', error);
+      throw new Error('Failed to fetch item.');
   }
 }
 
-export async function getProductsByArtisan(id: string){
-  noStore();
-  try {
-      const products = await sql`
-            SELECT HandcraftedHavenProducts.*, HandcraftedHavenCategories.name as category
-                FROM HandcraftedHavenProducts
-                LEFT JOIN HandcraftedHavenCategories ON HandcraftedHavenProducts.category = HandcraftedHavenCategories.id
-                WHERE HandcraftedHavenProducts.artisan_id = ${id}`
-      const results = products.rows;
+export async function getIDNameImageByTVShowID() {
+	noStore();
+	try {
+      const items = await sql`SELECT tvshow_id, name, image FROM public.tvshow;`
+
+      const results = items.rows;
+
       const processed = results.map(item => {
-        console.log(item)
-        const picArray = {value:''}
-        if(item.pictures.length > 1) picArray.value = item.pictures
-        else picArray.value = item.pictures[0].split(',')
-        item.pictures = {small: picArray.value[0], medium: picArray.value[1], big: picArray.value[2]}
-        console.log(item)
+				return item as TVShow;
+			});
 
-        return item as Product;
-      })
+			return processed as Array<TVShow>;
 
-      return processed as Array<Product>
   } catch (error) {
-      console.error('Failed to fetch product:', error);
-      throw new Error('Failed to fetch product.');
+      console.error('Failed to fetch item:', error);
+      throw new Error('Failed to fetch item.');
   }
 }
 
-export async function getCategories(){
-  noStore();
-  try {
-      const categories = await sql`SELECT * FROM HandcraftedHavenCategories ORDER BY name`;
-      const results = categories.rows;
-      console.log(results as Array<Category>)
+export async function getIDNameImageByGameID(tableName: string) {
+	noStore();
+	try {
+      const items = await sql`SELECT ${tableName}_id, name, image FROM public.${tableName};`
 
-      return results as Array<Category>;
+      const results = items.rows;
+
+      const processed = results.map(item => {
+				return item as Game;
+			});
+
+			return processed as Array<Game>;
+
   } catch (error) {
-      console.error('Failed to fetch product:', error);
-      throw new Error('Failed to fetch product.');
+      console.error('Failed to fetch item:', error);
+      throw new Error('Failed to fetch item.');
   }
 }
 
-export async function getXAmountTopProducts(limit: number) {
-  noStore();
-  try {
-    const products = await sql`SELECT HandcraftedHavenProducts.*, HandcraftedHavenCategories.name as category
-                                FROM HandcraftedHavenProducts
-                                LEFT JOIN HandcraftedHavenCategories ON HandcraftedHavenProducts.category = HandcraftedHavenCategories.id
-                                WHERE HandcraftedHavenProducts.rating = 5
-                                LIMIT ${limit}`;
+export async function getIDNameImageByMusicID() {
+	noStore();
+	try {
+      const items = await sql`SELECT music_id, name, image FROM public.music;`
 
-    const results = products.rows;
-    const processed = results.map(item => {
-      const picArray = {value:''}
-        if(item.pictures.length > 1) picArray.value = item.pictures
-        else picArray.value = item.pictures[0].split(',')
-      item.pictures = { small: picArray.value[0], medium: picArray.value[1], big: picArray.value[2] };
+      const results = items.rows;
 
-      return item as Product;
-    });
+      const processed = results.map(item => {
+				return item as Music;
+			});
 
-    return processed as Array<Product>;
+			return processed as Array<Music>;
+
   } catch (error) {
-    console.error('Failed to fetch product:', error);
-    throw new Error('Failed to fetch product.');
+      console.error('Failed to fetch item:', error);
+      throw new Error('Failed to fetch item.');
   }
 }
 
-export async function getArtisans(limit: number | null = null) {
+export async function getIDNameImageByWebsiteID() {
+	noStore();
+	try {
+      const items = await sql`SELECT website_id, name, image FROM public.website;`
+
+      const results = items.rows;
+
+      const processed = results.map(item => {
+				return item as Website;
+			});
+
+			return processed as Array<Website>;
+
+  } catch (error) {
+      console.error('Failed to fetch item:', error);
+      throw new Error('Failed to fetch item.');
+  }
+}
+
+export async function getBookById(id: string){
   noStore();
   try {
-    let query;
-
-
-
-    if (limit) {
-
-      query = await sql`SELECT * FROM HandcraftedHavenArtisans LIMIT ${limit}`;
-    } else {
-      query = await sql`SELECT * FROM HandcraftedHavenArtisans LIMIT (SELECT COUNT(*) FROM HandcraftedHavenArtisans)`
-    }
-
-    // const artisans = await query;
-    const results = query.rows;
-
-
-    const processed = results.map(item => {
-      const picArray = {value:''}
-        if(item.pictures.length > 1) picArray.value = item.pictures
-        else picArray.value = item.pictures[0].split(',')
-      item.pictures = { small: picArray.value[0], medium: picArray.value[1], big: picArray.value[2] };
-
-      return item as Artisan;
-    });
-    console.log(processed)
-    return processed as Array<Artisan>;
+		const book = await sql`SELECT * FROM public.book WHERE book_id=${id};`
+		const bookItem = book.rows[0];
+    return bookItem as Book;
   } catch (error) {
-    console.error('Failed to fetch artisans:', error);
-    throw new Error('Failed to fetch artisans.');
+    console.error('Failed to fetch book:', error);
+    throw new Error('Failed to fetch book.');
+  }
+}
+
+export async function getMovieById(id: string){
+  noStore();
+  try {
+		const movie = await sql`SELECT * FROM public.movie WHERE movie_id=${id};`
+		const movieItem = movie.rows[0];
+    return movieItem as Movie;
+  } catch (error) {
+    console.error('Failed to fetch movie:', error);
+    throw new Error('Failed to fetch movie.');
+  }
+}
+
+export async function getTVShowById(id: string){
+  noStore();
+  try {
+		const tvshow = await sql`SELECT * FROM public.tvshow WHERE tvshow_id=${id};`
+		const tvshowItem = tvshow.rows[0];
+    return tvshowItem as TVShow;
+  } catch (error) {
+    console.error('Failed to fetch tvshow:', error);
+    throw new Error('Failed to fetch tvshow.');
+  }
+}
+
+export async function getGameById(id: string, tableName: string){
+  noStore();
+  try {
+		const game = await sql`SELECT * FROM public.${tableName} WHERE ${tableName}_id=${id};`
+		const gameItem = game.rows[0];
+    return gameItem as Game;
+  } catch (error) {
+    console.error(`Failed to fetch ${tableName}:`, error);
+    throw new Error(`Failed to fetch ${tableName}.`);
+  }
+}
+
+export async function getMusicById(id: string){
+  noStore();
+  try {
+		const music = await sql`SELECT * FROM public.music WHERE music_id=${id};`
+		const musicItem = music.rows[0];
+    return musicItem as Music;
+  } catch (error) {
+    console.error('Failed to fetch music:', error);
+    throw new Error('Failed to fetch music.');
+  }
+}
+
+export async function getWebsiteById(id: string){
+  noStore();
+  try {
+		const website = await sql`SELECT * FROM public.website WHERE website_id=${id};`
+		const websiteItem = website.rows[0];
+    return websiteItem as Website;
+  } catch (error) {
+    console.error('Failed to fetch website:', error);
+    throw new Error('Failed to fetch website.');
   }
 }

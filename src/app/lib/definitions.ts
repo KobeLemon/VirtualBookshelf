@@ -6,81 +6,81 @@ export type User = {
 }
 
 export type Book = {
-  book_id: number;
+  book_id: string;
   name: string;
   description: string;
   image: string;
 	author: string
 	publisher: string
 	format: string;
-	category_id: number;
-	user_id: number;
+	category_id: string;
+	user_id: string;
 };
 
 export type Movie = {
-	movie_id: number;
+	movie_id: string;
   name: string;
   description: string;
   image: string;
 	director: string;
 	distributor: string;
 	format: string;
-	category_id: number;
-	user_id: number;
+	category_id: string;
+	user_id: string;
 };
 
 export type TVShow = {
-  tv_id: number;
+  tvshow_id: string;
   name: string;
   description: string;
   image: string;
 	network: string;
 	format: string;
-	category_id: number;
-	user_id: number;
+	category_id: string;
+	user_id: string;
 };
 
 export type Game = {
-  game_id: number;
+  game_id: string;
   name: string;
   description: string;
   image: string;
 	developer: string;
 	publisher: string;
 	format: string;
-	category_id: number;
-	user_id: number;
+	category_id: string;
+	user_id: string;
 };
 
 export type Music = {
-	music_id: number;
+	music_id: string;
 	name: string;
 	description: string;
 	image: string;
 	artist: string;
 	studio: string;
 	format: string;
-	category_id: number;
-	user_id: number
+	category_id: string;
+	user_id: string
 }
 
 export type Website = {
-  website_id: number;
+  website_id: string;
   name: string;
 	url: string;
   description: string;
 	creator: string;
   image: string;
-	category_id: number;
-	user_id: number;
+	category_id: string;
+	user_id: string;
 };
 
 export type Category = {
-    category_id: number;
+    category_id: string;
     name: string;
   };
 
 export type Genre = {
-    genre_id: number;
+    genre_id: string;
     name: string;
   }

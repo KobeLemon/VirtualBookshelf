@@ -23,26 +23,26 @@ let categories: Array<any> = [
 		category_id: 3,
 		name: 'TV Shows',
 	},
-	{
-		category_id: 4,
-		name: 'Video Games',
-	},
-	{
-		category_id: 5,
-		name: 'Card Games',
-	},
-	{
-		category_id: 6,
-		name: 'Board Games',
-	},
-	{
-		category_id: 7,
-		name: 'Music',
-	},
-	{
-		category_id: 8,
-		name: 'Websites',
-	},
+	// {
+	// 	category_id: 4,
+	// 	name: 'Video Games',
+	// },
+	// {
+	// 	category_id: 5,
+	// 	name: 'Card Games',
+	// },
+	// {
+	// 	category_id: 6,
+	// 	name: 'Board Games',
+	// },
+	// {
+	// 	category_id: 7,
+	// 	name: 'Music',
+	// },
+	// {
+	// 	category_id: 8,
+	// 	name: 'Websites',
+	// },
 ];
 
 return (

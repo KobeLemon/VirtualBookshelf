@@ -1,76 +1,66 @@
 'use client';
-import Link from "next/link";
-import Logo from "@/app/ui/header/logo";
-import { signIn, signOut, useSession } from "next-auth/react";
-
-function AuthButton() {
-	// const { data: session } = useSession();
-
-	// if (session) {
-		// console.log(session);
-	// 	return (
-	// 		<>
-	// 			<div className="flex gap-5">
-	// 				<button onClick={() => signOut()}>Sign Out</button>
-	// 				<p>|</p>
-	// 				<a href="/">Go to my Bookshelf</a>
-	// 			</div>
-	// 		</>
-	// 	);
-	// } else {
-	// 	return (
-	// 		<>
-	// 			<div className="flex gap-5">
-	// 				<button onClick={() => signIn() }>Sign In</button>
-	// 			</div>
-	// 		</>
-	// 	);
-	// }
-}
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
+import Logo from '@/app/ui/header/logo';
+import CatSignOut from './CatSignOut';
 
 export default function Nav() {
-    return (
-			<header className="bg-light-grayish-blue col-span-full">
-				<nav className="flex justify-between h-full items-center">
-					<Logo/>
+	return (
+		<header className='bg-light-grayish-blue col-span-full'>
+			<nav className='flex justify-around h-full items-center'>
+				<Logo />
 
-					<Link className="text-xs hover:underline underline-offset-4" href="/main/books">Books</Link>
+				<p>|</p>
 
-					<p>|</p>
+				<CatSignOut/>
 
-					<Link className="text-xs hover:underline underline-offset-4" href="/main/movies">Movies</Link>
+				<Link className='text-sm hover:underline underline-offset-4' href='/main/categories/1'>
+					Books
+				</Link>
 
-					<p>|</p>
+				<p>|</p>
 
-					<Link className="text-xs hover:underline underline-offset-4" href="/main/tv-shows">TV Shows</Link>
+				<Link className='text-sm hover:underline underline-offset-4' href='/main/categories/2'>
+					Movies
+				</Link>
 
-					<p>|</p>
+				<p>|</p>
 
-					<Link className="text-xs hover:underline underline-offset-4" href="/main/video-games">Video Games</Link>
+				<Link className='text-sm hover:underline underline-offset-4' href='/main/categories/3'>
+					TV Shows
+				</Link>
 
-					<p>|</p>
+				{/* <p>|</p>
 
-					<Link className="text-xs hover:underline underline-offset-4" href="/main/card-games">Card Games</Link>
+				<Link className='text-sm hover:underline underline-offset-4' href='/main/categories/4'>
+					Video Games
+				</Link>
 
-					<p>|</p>
+				<p>|</p>
 
-					<Link className="text-xs hover:underline underline-offset-4" href="/main/board-games">Board Games</Link>
+				<Link className='text-sm hover:underline underline-offset-4' href='/main/categories/5'>
+					Card Games
+				</Link>
 
-					<p>|</p>
+				<p>|</p>
 
-					<Link className="text-xs hover:underline underline-offset-4" href="/main/music">Music</Link>
+				<Link className='text-sm hover:underline underline-offset-4' href='/main/categories/6'>
+					Board Games
+				</Link>
 
-					<p>|</p>
+				<p>|</p>
 
-					<Link className="text-xs hover:underline underline-offset-4" href="/main/websites">Websites</Link>
+				<Link className='text-sm hover:underline underline-offset-4' href='/main/categories/7'>
+					Music
+				</Link>
 
-					<p>|</p>
+				<p>|</p>
 
-					{/* <div className="flex me-5 gap-5 justify-around md:me-10 md:gap-10"> */}
-							{/* <AuthButton/> */}
-					{/* </div> */}
+				<Link className='text-sm hover:underline underline-offset-4' href='/main/categories/8'>
+					Websites
+				</Link> */}
 
-				</nav>
-			</header>
-    )
+			</nav>
+		</header>
+	);
 }

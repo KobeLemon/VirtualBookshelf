@@ -7,19 +7,19 @@ export default function BooksList({ books }: { books: Book[] }) {
 	} else {
 		return (
 			<>
-				<ul className='grid grid-cols-4 gap-y-10 border rounded p-10'>
+				<ul className='grid grid-cols-4 gap-y-10 border rounded p-10 mt-5'>
 					{books.map((book: Book) => (
 						<CategoryBookCard
 							key={book.book_id}
 							book_id={book.book_id}
 							name={book.name}
-							description=""
+							description=''
 							image={book.image}
-							author=""
-							publisher=""
-							format=""
-							category_id={0}
-							user_id={0}
+							author=''
+							publisher=''
+							format=''
+							category_id=''
+							user_id=''
 						/>
 					))}
 				</ul>

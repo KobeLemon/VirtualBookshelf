@@ -7,7 +7,7 @@ export default function CategoriesList({ categories }: { categories: Category[] 
 	} else {
 		return (
 			<>
-				<ul className='grid grid-cols-4 gap-10 border rounded p-10'>
+				<ul className='grid grid-cols-4 gap-10 border rounded-md p-10 mt-5'>
 					{categories.map((category: Category) => (
 						<CategoryCard
 							key={category.category_id}

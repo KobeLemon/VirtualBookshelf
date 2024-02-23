@@ -7,7 +7,7 @@ export default function MoviesList({ movies }: { movies: Movie[] }) {
 	} else {
 		return (
 			<>
-				<ul className='grid grid-cols-4 gap-y-10 border rounded p-10'>
+				<ul className='grid grid-cols-4 gap-y-10 border rounded p-10 mt-5'>
 					{movies.map((movie: Movie) => (
 						<CategoryMovieCard
 							key={movie.movie_id}
