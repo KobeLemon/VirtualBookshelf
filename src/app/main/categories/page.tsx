@@ -1,7 +1,7 @@
 import CategoriesList from '@/app/ui/categories/categoriesList';
 import { Metadata } from 'next';
 // import { getCategories } from '../lib/data';
-// import CategoryList from '../ui/categories/CategoryList';
+
 
 export const metadata: Metadata = {
   title: 'Categories',
